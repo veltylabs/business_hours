@@ -91,7 +91,7 @@ func TestGetSchedule_Empty(t *testing.T) {
 	}
 }
 
-func TestMountOps_GetBusinessHours(t *testing.T) {
+func TestMountOperations_GetBusinessHours(t *testing.T) {
 	m, db, ids := setup(t)
 	seedWeek(t, db, ids)
 
@@ -106,7 +106,7 @@ func TestMountOps_GetBusinessHours(t *testing.T) {
 	reg.Configure(mock.Config{
 		Authorize: func(userID string, r model.Resource, a model.Action) bool { return true },
 	})
-	m.MountOps(reg)
+	m.MountOperations(reg)
 
 	routes := reg.Routes()
 	if len(routes) != 1 {
@@ -147,14 +147,14 @@ func TestMountOps_GetBusinessHours(t *testing.T) {
 	}
 }
 
-func TestMountOps_GetBusinessHours_Empty(t *testing.T) {
+func TestMountOperations_GetBusinessHours_Empty(t *testing.T) {
 	m, _, _ := setup(t) // sin seedWeek — la tabla queda vacía
 
 	reg := &mock.Router{}
 	reg.Configure(mock.Config{
 		Authorize: func(userID string, r model.Resource, a model.Action) bool { return true },
 	})
-	m.MountOps(reg)
+	m.MountOperations(reg)
 
 	ctx := &mock.Context{}
 	ctx.SetUserID("u1")

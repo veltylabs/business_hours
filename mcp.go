@@ -39,15 +39,15 @@ const OpGetBusinessHours = "get_business_hours"
 
 func (m *Module) ModelName() string { return "business_hours" }
 
-func (m *Module) MountOps(reg router.OpRegistry) {
+func (m *Module) MountOperations(reg router.OperationRegistry) {
 	// Esta operación no acepta parámetros — Accepts(nil) es la declaración documentada para "sin argumentos"
 	// (comentario de documentación de router.Route). Nunca invente una estructura de argumentos vacía para una operación sin argumentos.
-	reg.Op(OpGetBusinessHours, m.opGetBusinessHours).
+	reg.Operation(OpGetBusinessHours, m.opGetBusinessHours).
 		Requires("business_hours", model.Read).
 		Accepts(nil)
 }
 
-var _ router.OpModule = (*Module)(nil)
+var _ router.OperationModule = (*Module)(nil)
 
 // GetSchedule devuelve las 7 filas ordenadas por day_of_week, o ErrNotFound si la tabla está vacía
 // (sin sembrar — la aplicación de composición raíz es responsable de sembrar las 7 filas; ver AGENTS.md).
